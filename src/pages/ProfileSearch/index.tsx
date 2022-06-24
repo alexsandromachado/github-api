@@ -3,52 +3,48 @@ import './styles.css';
 import ResultCard from 'components/ResultCard';
 import { useState } from 'react';
 import axios from 'axios';
+import { Profile } from 'types/profile';
 
 type FormData = {
-  cep: string;
-};
-
-type Address = {
-  logradouro: string;
-  localidade: string;
+  usuario: string;
 };
 
 const ProfileSearch = () => {
-  const [address, setAddress] = useState<Address>();
+  const [profile, setProfile] = useState<Profile>();
   const [formData, setFormData] = useState<FormData>({
-    cep: '',
+    usuario: '',
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const name = event.target.name;
+    const usuario = event.target.name;
     const value = event.target.value;
 
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [usuario]: value });
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     axios
-      .get(`https://viacep.com.br/ws/${formData.cep}/json/`)
+      .get(`https://api.github.com/users/${formData.usuario}`)
       .then((response) => {
-        setAddress(response.data);
+        setProfile(response.data);
       })
       .catch((error) => {
-        setAddress(undefined);
+        setProfile(undefined);
       });
   };
 
   return (
     <div className="profile-search-container">
-      <div className=" search-container">
+      <div className="search-container">
         <h1>Encontre um perfil Github</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-container input-container">
             <input
               type="text"
-              name="useario"
-              value={formData.cep}
+              name="usuario"
+              value={formData.usuario}
               className="search-input"
               placeholder="Usuário Github"
               onChange={handleChange}
@@ -59,7 +55,7 @@ const ProfileSearch = () => {
           </div>
         </form>
       </div>
-      <ResultCard />
+      {profile && <ResultCard profile={profile} />}
     </div>
   );
 };
