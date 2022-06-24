@@ -13,7 +13,7 @@ type Address = {
   localidade: string;
 };
 
-const CepSearch = () => {
+const ProfileSearch = () => {
   const [address, setAddress] = useState<Address>();
   const [formData, setFormData] = useState<FormData>({
     cep: '',
@@ -40,14 +40,14 @@ const CepSearch = () => {
   };
 
   return (
-    <div className="cep-search-container">
-      <div className="container search-container">
-      <h1>Encontre um perfil Github</h1>
+    <div className="profile-search-container">
+      <div className=" search-container">
+        <h1>Encontre um perfil Github</h1>
         <form onSubmit={handleSubmit}>
-          <div className="form-container">
+          <div className="form-container input-container">
             <input
               type="text"
-              name="cep"
+              name="useario"
               value={formData.cep}
               className="search-input"
               placeholder="Usuário Github"
@@ -58,15 +58,10 @@ const CepSearch = () => {
             </button>
           </div>
         </form>
-        {address && (
-          <>
-            <ResultCard title="Logradouro" description={address.logradouro} />
-            <ResultCard title="Localidade" description={address.localidade} />
-          </>
-        )}
       </div>
+      <ResultCard />
     </div>
   );
 };
 
-export default CepSearch;
+export default ProfileSearch;

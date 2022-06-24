@@ -10,16 +10,30 @@
 }
 
 .text-container {
-  height: 104px;
-  margin-bottom: 27px;
+  height: 90px;
 }
 
 .text-container h1 {
-  font-size: 48px;
+  font-size: 28px;
 }
 
 .text-container p {
-  font-size: 24px;
+  font-size: 14px;
   font-weight: bold;
   color: #7e7e7e;
+}
+
+@media (min-width: 576px) {
+  .text-container {
+    height: 104px;
+    margin-bottom: 27px;
+  }
+
+  .text-container h1 {
+    font-size: 48px;
+  }
+
+  .text-container p {
+    font-size: 24px;
+  }
 }
